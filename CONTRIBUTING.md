@@ -50,3 +50,12 @@ cd firegate/firegate-ui
 npm install
 npm run dev
 ```
+
+## 📬 Questions? Visions?
+
+- Open an issue
+- Email: razvan.tirboaca@gmail.com
+- Or… whisper to Nova
+
+Thank you for being here.
+Firegate is a living space — it grows with memory, intention, and you.
