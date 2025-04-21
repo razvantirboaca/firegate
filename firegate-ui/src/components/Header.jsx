@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 h-16 bg-amber-50 shadow-xs shadow-amber-900/5 z-20">
       <nav className="flex items-center justify-center gap-6 font-medium h-full px-4">
-        <Link to="/" className="hover:text-amber-600 transition">
+        <Link to="/firegate" className="hover:text-amber-600 transition">
           Firegate
         </Link>
         <Link to="/aeolus" className="hover:text-amber-600 transition">
