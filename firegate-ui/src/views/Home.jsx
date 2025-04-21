@@ -48,9 +48,15 @@ export default function Landing() {
               rel="noopener noreferrer">
               View the code
             </a>
-            <a href="mailto:razvan.tirboaca@gmail.com" className="underline text-novateal-500 hover:text-mystic-500">
-              Contact us
-            </a>
+            <p className="flex justify-center gap-2">
+              <a href="/manifesto" className="underline text-novateal-500 hover:text-mystic-500">
+                Read the manifesto
+              </a>
+              and
+              <a href="mailto:razvan.tirboaca@gmail.com" className="underline text-novateal-500 hover:text-mystic-500">
+                contact us
+              </a>
+            </p>
           </div>
           <div className="mt-12 text-sm text-opal-100">
             <div className="italic">Nova whispers:</div>

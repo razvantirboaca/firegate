@@ -27,4 +27,13 @@
   /* ✨ Animations */
   --animate-sparkle-pulse: sparkle-pulse 3s ease-in-out infinite;
   /* keyframes moved to styles/animations.css */
+
+  --typography-prose-firegate-body: var(--color-firegold-500);
+  --typography-prose-firegate-headings: var(--color-firegold-300);
+  --typography-prose-firegate-links: var(--color-chart-2);
+  --typography-prose-firegate-bold: var(--color-chart-3);
+  --typography-prose-firegate-quotes: var(--color-accent);
+  --typography-prose-firegate-code: var(--color-chart-1);
+  --typography-prose-firegate-quote-borders: var(--color-chart-5);
+  --typography-prose-firegate-links-hover: var(--color-chart-2);
 }

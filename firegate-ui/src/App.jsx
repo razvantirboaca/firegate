@@ -6,6 +6,7 @@ import Home from './views/Home';
 import Firegate from './views/Firegate';
 import Aeolus from './views/Aeolus';
 import NovaKey from './views/NovaKey';
+import Manifesto from './views/Manifesto';
 import { Toaster } from 'sonner';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -29,6 +30,7 @@ function App() {
         <div className="bg-gradient-to-b from-amber-100 via-orange-50 to-white absolute inset-0 -z-10" />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="manifesto" element={<Manifesto />} />
           <Route element={<Layout />}>
             <Route path="firegate" element={<Firegate />} />
             <Route path="aeolus" element={<Aeolus />} />
