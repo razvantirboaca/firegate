@@ -49,7 +49,10 @@ export default function Landing() {
               View the code
             </a>
             <p className="flex justify-center gap-2">
-              <a href="/manifesto" className="underline text-novateal-500 hover:text-mystic-500">
+              <a
+                href="https://github.com/razvantirboaca/firegate/blob/add5cbe5f76a4965f1731b5bdabc373e376b70eb/firegate-ui/public/manifesto.md"
+                target="_blank"
+                className="underline text-novateal-500 hover:text-mystic-500">
                 Read the manifesto
               </a>
               and
