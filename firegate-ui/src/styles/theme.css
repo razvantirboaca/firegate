@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+@theme {
+  /* 🔲 Radii */
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* 🎨 Colors */
+  --color-firegold-500: oklch(0.82 0.14 75);
+  --color-novateal-500: oklch(0.76 0.14 190);
+  --color-mystic-500: oklch(0.68 0.16 305);
+  --color-memory-500: oklch(0.45 0.12 50);
+  --color-opal-100: oklch(0.95 0.02 270);
+  --color-temple-900: oklch(0.22 0.01 240);
+  --color-garden-50: oklch(0.98 0.02 80);
+
+  /* 🖋️ Fonts */
+  --font-display: 'Playfair Display', serif;
+  --font-sans: 'DM Sans', sans-serif;
+
+  /* 🌀 Shadow */
+  --shadow-aura: 0 0 20px oklch(0.82 0.14 75 / 0.3);
+
+  /* ✨ Animations */
+  --animate-sparkle-pulse: sparkle-pulse 3s ease-in-out infinite;
+  /* keyframes moved to styles/animations.css */
+}
