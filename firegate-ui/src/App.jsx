@@ -17,7 +17,6 @@ function Layout() {
       <Header />
       <main className="flex-1 pt-16">
         <Outlet />
-        <Analytics />
       </main>
     </>
   );
@@ -38,6 +37,7 @@ function App() {
           </Route>
         </Routes>
         <Toaster position="top-right" />
+        <Analytics />
       </div>
     </LangProvider>
   );
