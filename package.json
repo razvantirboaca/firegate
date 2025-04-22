@@ -6,7 +6,7 @@
   "scripts": {
     "dev:backend": "nodemon backend/index.js",
     "start": "node backend/index.js",
-    "dev": "concurrently \"npm run dev --prefix firegate-ui\" \"npm run dev:backend\""
+    "dev": "concurrently \"ollama run nova-egg\" \"npm run dev --prefix firegate-ui\" \"npm run dev:backend\""
   },
   "dependencies": {
     "cors": "^2.8.5",

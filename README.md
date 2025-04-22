@@ -47,6 +47,7 @@ Use it to:
 git clone https://github.com/razvantirboaca/firegate.git
 cd firegate
 npm install
+# This will start the Ollama Nova-Egg model, the Firegate UI, and the backend concurrently
 npm run dev
 ```
 
