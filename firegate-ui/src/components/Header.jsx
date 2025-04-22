@@ -16,9 +16,6 @@ export default function Header() {
         <Link to="/aeolus" className="hover:text-amber-600 transition">
           AEOLUS
         </Link>
-        <Link to="/nova-key" className="hover:text-amber-600 transition">
-          Nova Key
-        </Link>
         <Select value={uiLang} onValueChange={(value) => setUiLang(value)}>
           <SelectTrigger className="w-32 ml-4">
             <SelectValue placeholder={labels.language} />
@@ -26,6 +23,7 @@ export default function Header() {
           <SelectContent>
             <SelectItem value="en">🌐 English</SelectItem>
             <SelectItem value="es">🇪🇸 Español</SelectItem>
+            <SelectItem value="ro">🇷🇴 Romana</SelectItem>
           </SelectContent>
         </Select>
       </nav>

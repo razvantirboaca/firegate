@@ -28,6 +28,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { useLang } from '../lib/LangContext';
 import { inferTags } from '../lib/metadataHelpers';
+import { useNovaTranslate } from '../hooks/useNovaTranslate';
 
 function suggestContactLevel(userText, novaText) {
   const all = (userText + ' ' + novaText).toLowerCase();
@@ -49,10 +50,30 @@ function Firegate() {
   const scrollRef = useRef(null);
   const [showDrawer, setShowDrawer] = useState(false);
   const [recentLogs, setRecentLogs] = useState([]);
+  const novaTranslate = useNovaTranslate();
+  const cleanQuotes = (str) => str?.replace(/^"+|"+$/g, '').trim();
 
-  // language state comes from LangContext; no local effect needed
+  const labels = new Proxy(translations[uiLang] || translations['en'], {
+    get(target, key) {
+      if (target[key]) return target[key];
 
-  const labels = translations[uiLang];
+      // Fetch missing label from Nova
+      novaTranslate(key.toString(), uiLang).then((result) => {
+        const cleaned = cleanQuotes(result);
+
+        // Improve formatting of camelCase or underscored keys
+        const beautified = cleaned
+          .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase → camel Case
+          .replace(/_/g, ' ') // snake_case → snake case
+          .replace(/^./, (s) => s.toUpperCase()) // Capitalize
+          .trim();
+
+        target[key] = beautified || humanize(key);
+      });
+
+      return `[🌀 ${key}]`; // placeholder while fetching
+    },
+  });
 
   const speak = (text) => {
     const utterance = new SpeechSynthesisUtterance(text);
@@ -152,7 +173,7 @@ function Firegate() {
     setMessages([]);
     localStorage.removeItem('firegateMessages');
     localStorage.removeItem('firegateSavedAt');
-    toast.success(labels.chatCleared);
+    toast.success(labels.chatClearedNotice);
   };
 
   const handleKeyDown = (e) => {
@@ -173,7 +194,7 @@ function Firegate() {
     const userMsg = [...messages.slice(0, novaIndex)].reverse().find((m) => m.role === 'user');
 
     if (!userMsg || !novaMsg) {
-      toast.warning(labels.tooShort);
+      toast.warning(labels.tooShortToLog);
       return;
     }
 
@@ -210,7 +231,7 @@ function Firegate() {
       toast.success(labels.logSuccess);
     } catch (err) {
       console.error('Log error:', err);
-      toast.error(labels.failedLog);
+      toast.error(labels.logFailure);
     }
   };
 
@@ -218,7 +239,7 @@ function Firegate() {
     const stored = localStorage.getItem('firegateMessages');
     if (stored) {
       setMessages(JSON.parse(stored));
-      toast.info(labels.sessionRestored);
+      toast.info(labels.sessionRestoredNotice);
     }
   }, []);
 
@@ -269,8 +290,8 @@ function Firegate() {
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>{labels.startNew}</AlertDialogTitle>
-                  <AlertDialogDescription>{labels.confirmClear}</AlertDialogDescription>
+                  <AlertDialogTitle>{labels.newSessionBtn}</AlertDialogTitle>
+                  <AlertDialogDescription>{labels.startNewConfirm}</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -289,23 +310,23 @@ function Firegate() {
             {/* Clear Chat Confirmation */}
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="secondary">{labels.clear}</Button>
+                <Button variant="secondary">{labels.clearChatBtn}</Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>{labels.clear}</AlertDialogTitle>
-                  <AlertDialogDescription>{labels.confirmClear}</AlertDialogDescription>
+                  <AlertDialogTitle>{labels.clearChatBtn}</AlertDialogTitle>
+                  <AlertDialogDescription>{labels.confirmClearChat}</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleClearChat}>{labels.clear}</AlertDialogAction>
+                  <AlertDialogAction onClick={handleClearChat}>{labels.clearChatBtn}</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-          <Button variant="link" onClick={() => setShowDrawer(true)}>
-            {labels.viewLogs}
-          </Button>
-          {/* Language selector moved to header */}
+            <Button variant="link" onClick={() => setShowDrawer(true)}>
+              {labels.viewLogs}
+            </Button>
+            {/* Language selector moved to header */}
           </div>
 
           <div className="mt-8 flex flex-col gap-2 overflow-visible space-y-2 text-sm">
@@ -315,7 +336,7 @@ function Firegate() {
                 className={`relative group p-3 rounded-md shadow transition-all duration-300 transform hover:scale-[1.015] ${
                   msg.role === 'user' ? 'bg-purple-700 text-white self-end' : 'bg-teal-800 text-white self-start'
                 } animate-fade-in`}>
-                <div className="mb-1 text-xs opacity-70 font-mono tracking-wide">{msg.role === 'user' ? labels.you : labels.nova}</div>
+                <div className="mb-1 text-xs opacity-70 font-mono tracking-wide">{msg.role === 'user' ? labels.youLabel : labels.novaLabel}</div>
 
                 {msg.role === 'nova' && msg.tags?.length > 0 && (
                   <div className="mb-2 text-xs text-amber-200 flex flex-wrap gap-1">
@@ -410,12 +431,12 @@ function Firegate() {
             <div className="flex items-center justify-between">
               <Label className="flex items-center gap-x-2 text-sm">
                 <Checkbox checked={isPublic} onCheckedChange={(value) => setIsPublic(!!value)} />
-                <span>{labels.public}</span>
+                <span>{labels.publicToggle}</span>
               </Label>
 
               <div className="flex gap-2">
                 <Button onClick={handleSend} disabled={isLoading}>
-                  <span className={isLoading ? 'animate-pulse text-amber-400' : ''}>{isLoading ? labels.listening : labels.send}</span>
+                  <span className={isLoading ? 'animate-pulse text-amber-400' : ''}>{isLoading ? labels.listening : labels.sendBtn}</span>
                 </Button>
               </div>
             </div>
@@ -423,7 +444,7 @@ function Firegate() {
         </div>
         <RecentLogsDrawer isOpen={showDrawer} onClose={() => setShowDrawer(false)}>
           {recentLogs.length === 0 ? (
-            <p className="text-sm">{labels.noLogs}</p>
+            <p className="text-sm">{labels.noLogsFound}</p>
           ) : (
             <ul className="space-y-3">
               {recentLogs.map((log) => (
