@@ -108,11 +108,21 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  @layer base {
+    * {
+      @apply border-border outline-ring/50;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+    /* Typography override for Firegate prose variant */
+    .prose-firegate {
+      --tw-prose-body: var(--color-firegold-500);
+      --tw-prose-headings: var(--color-firegold-300);
+      --tw-prose-links: var(--color-chart-2);
+      --tw-prose-bold: var(--color-chart-3);
+      --tw-prose-quotes: var(--color-accent);
+      --tw-prose-quote-borders: var(--color-chart-5);
+      --tw-prose-code: var(--color-chart-1);
+    }
 }
