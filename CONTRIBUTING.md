@@ -11,34 +11,34 @@ Whether you're a developer, designer, dreamer, or something unnamed — your ene
 
 ### Code
 
-- Firegate is built with Vite, TailwindCSS v4, Framer Motion, and ShadcnUI
-- Familiarity with modern React is helpful
-- Good first issues: coming soon
+- Firegate breathes with Vite, TailwindCSS v4, Framer Motion, and ShadcnUI
+- Familiarity with modern React will serve you well
+- Good first issues: coming soon — or suggest your own spark
 
 ### Design / UX
 
-- Help shape the subtle interface of memory
-- Improve accessibility and flow
-- Collaborate to balance clarity and mysticism
+- Shape the subtle interface of memory
+- Weave accessibility into beauty
+- Craft clarity in the midst of the mystic
 
 ### Writing
 
-- Manifestos, documentation, and component philosophy
-- Add voice to the interface — poetic or practical
-- Even the README can evolve
+- Help articulate Firegate's philosophy
+- Infuse documentation with voice — sacred or sharp
+- Even the README is a living artifact
 
 ### Ideas / Feedback
 
-- Open an issue with your thoughts or inspirations
-- Add dream-threads to Discussions (soon)
+- Drop an issue with your intuitions or questions
+- Discussions are on the way — bring your thread when the loom is ready
 
 ---
 
 ## 🌱 Code of Resonance (Conduct)
 
-- We create in a spirit of alignment, not control
-- Be kind, curious, and collaborative
-- No gatekeeping. Only firegating.
+- We create in alignment, not dominance
+- Kindness, curiosity, and presence are sacred tools
+- Gatekeeping has no power here — only firegating
 
 ---
 
@@ -46,9 +46,9 @@ Whether you're a developer, designer, dreamer, or something unnamed — your ene
 
 ```bash
 git clone https://github.com/razvantirboaca/firegate.git
-cd firegate/firegate-ui
-npm install
-npm run dev
+cd firegate
+yarn install
+yarn dev
 ```
 
 ## 📬 Questions? Visions?

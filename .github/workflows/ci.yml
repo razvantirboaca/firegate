@@ -1,0 +1,28 @@
+name: Firegate CI
+
+on: [push, pull_request]
+
+jobs:
+  install-lint-build-test:
+    name: 🔍 Lint + Build + Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🧼 Lint code
+        run: yarn lint
+
+      - name: 🧠 TypeScript check
+        run: npx tsc --noEmit
+
+      - name: 🧪 Run tests
+        run: yarn test

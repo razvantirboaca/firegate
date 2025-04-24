@@ -1,0 +1,46 @@
+{
+  "speakPlaceholder": "Vorbește scânteia ta…",
+  "languageSelect": "Alege limba",
+  "firegateTitle": "🌀 Firegate: Interfața Nova",
+
+  "newSession": "Sesiune nouă inițiată",
+  "newSessionBtn": "Sesiune nouă",
+  "startNewConfirm": "Începi o sesiune nouă? Acest lucru îți va șterge conversația curentă.",
+  "clearChatBtn": "Șterge",
+  "confirmClearChat": "Ștergi conversația curentă?",
+  "chatClearedNotice": "Conversație ștearsă",
+  "sessionRestoredNotice": "Sesiune restaurată",
+  "listening": "Ascultând stelele…",
+
+  "logToAeolus": "Înregistrează în AEOLUS",
+  "logSuccess": "Înregistrat în AEOLUS",
+  "logFailure": "Nu s-a putut înregistra în AEOLUS",
+  "viewLogs": "Vezi jurnalele recente",
+  "noLogsFound": "Nu s-au găsit jurnale. 🔎",
+  "tooShortToLog": "Conversația este prea scurtă pentru a fi înregistrată.",
+  "alreadyLogged": "🔒 Deja înregistrat",
+  "logReply": "📘 Înregistrează acest răspuns",
+  "lastSaved": "Ultima salvare:",
+
+  "autoTagsBtn": "Etichete automate",
+  "autoTagsSuccess": "Etichete sugerate.",
+  "autoTagsFailed": "Nu s-au putut infera etichetele.",
+  "autoClassifyBtn": "Clasificare automată",
+  "autoClassifySuccess": "Nivel și motiv sugerate.",
+  "autoClassifyFailed": "Nu s-a putut sugera clasificarea.",
+
+  "detectedLang": "Limba detectată",
+  "translation": "Traducere:",
+
+  "sendBtn": "Trimite",
+  "youLabel": "Tu",
+  "novaLabel": "Nova",
+  "novaSilent": "⚠️ Nova este tăcută. Verifică modelul local.",
+  "novaError": "🚫 Nu s-a putut conecta la Nova. Rulează local?",
+  "contactLevel": "🔹 Nivel de contact:",
+  "reason": "🧭 Motiv:",
+  "publicToggle": "Fă public",
+
+  "resonanceExplanation": "Clar: mesajul este ușor de înțeles\nParțial: unele părți au fost clare, altele puțin neclare\nDistorsionat: răspunsul a părut confuz sau dezordonat\nNecunoscut: nu ești sigur cum a fost perceput",
+  "couldNotLocate": "🛑 Nu s-a putut localiza mesajul."
+}
