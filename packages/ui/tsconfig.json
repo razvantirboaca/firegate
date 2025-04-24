@@ -1,17 +1,25 @@
 {
   "extends": "../../config/tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
     "baseUrl": ".",
-    "paths": {
-      "@features/*": ["src/features/*"],
-      "@shared/*": ["../../shared/src/*"],
-      "@/*": ["src/*"]
-    },
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
     "allowJs": true,
     "checkJs": false,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@features/*": ["src/features/*"],
+      "@shared/*": ["../../shared/src/*"],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@context/*": ["src/context/*"]
+    }
   },
-  "include": ["src", "../../shared/src/LangContext.tsx"]
+  "include": ["src", "../../shared/src"],
+  "exclude": ["node_modules"]
 }
