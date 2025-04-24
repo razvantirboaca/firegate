@@ -6,6 +6,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "Node",
+    "composite": true,
     "allowJs": true,
     "checkJs": false,
     "resolveJsonModule": true,
