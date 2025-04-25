@@ -1481,7 +1481,7 @@
     "@tailwindcss/oxide-win32-arm64-msvc" "4.1.4"
     "@tailwindcss/oxide-win32-x64-msvc" "4.1.4"
 
-"@tailwindcss/postcss@^4.0.0":
+"@tailwindcss/postcss@^4.1.4":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@tailwindcss/postcss/-/postcss-4.1.4.tgz#47b1eca69e6895026f694242a3b87bb2d3b06b80"
   integrity sha512-bjV6sqycCEa+AQSt2Kr7wpGF1bOZJ5wsqnLEkqSbM/JEHxx/yhMH8wHmdkPyApF9xhHeMSwnnkDUUMMM/hYnXw==
@@ -1708,7 +1708,7 @@
     "@types/node" "*"
     form-data "^4.0.0"
 
-"@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0", "@types/node@^22.14.1":
+"@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0", "@types/node@^22.14.1", "@types/node@^22.15.2":
   version "22.15.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-22.15.2.tgz#1db55aa64618ee93a58c8912f74beefe44aca905"
   integrity sha512-uKXqKN9beGoMdBfcaTY1ecwz6ctxuJAcUlwE55938g0ZJ8lRxwAZqRz2AJ4pzpt5dHdTPMB863UZ0ESiFUcP7A==
@@ -3248,7 +3248,7 @@ fraction.js@^4.3.7:
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.3.7.tgz#06ca0085157e42fda7f9e726e79fefc4068840f7"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
 
-framer-motion@^12.9.1:
+framer-motion@^12.9.2:
   version "12.9.2"
   resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-12.9.2.tgz#d6b5f7c9553da17a4d92db293eebfbbf97bd4c33"
   integrity sha512-R0O3Jdqbfwywpm45obP+8sTgafmdEcUoShQTAV+rB5pi+Y1Px/FYL5qLLRe5tPtBdN1J4jos7M+xN2VV2oEAbQ==
@@ -5771,7 +5771,7 @@ tailwind-merge@^3.2.0:
   resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-3.2.0.tgz#bedcf6a67a8c982da5913afcba9c854f35abb857"
   integrity sha512-FQT/OVqCD+7edmmJpsgCsY820RTD5AkBryuG5IUqR5YQZSdj5xlH5nLgH7YPths7WsLPSpSBNneJdM8aS8aeFA==
 
-tailwindcss@4.1.4, tailwindcss@^4.0.0, tailwindcss@^4.1.4:
+tailwindcss@4.1.4, tailwindcss@^4.1.4:
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-4.1.4.tgz#27b3c910c6f1a47f4540451f3faf7cdd6d977a69"
   integrity sha512-1ZIUqtPITFbv/DxRmDr5/agPqJwF69d24m9qmM1939TJehgY539CtzeZRjbLt5G6fSy/7YqqYsfvoTEw9xUI2A==
