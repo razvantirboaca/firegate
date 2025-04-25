@@ -16,10 +16,10 @@ export function cn(...inputs: ClassValue[]) {
  * @param {string} str
  * @returns {string}
  */
-export function humanize(str) {
+export function humanize(str: string): string {
   return str
     .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase → camel Case
     .replace(/[_-]/g, ' ') // snake_case or kebab-case → snake case
-    .replace(/^./, (s) => s.toUpperCase())
+    .replace(/^./, (s: string) => s.toUpperCase())
     .trim();
 }

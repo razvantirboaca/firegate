@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 type Locale = 'en' | 'es' | 'ro';
 type TranslationMap = Record<Locale, Record<string, string>>;
 
-const LANGS = ['en', 'es', 'ro'];
+const LANGS: Locale[] = ['en', 'es', 'ro'];
 
 export default function TranslateUI() {
   const [data, setData] = useState<TranslationMap>(translations as TranslationMap);
@@ -28,7 +28,7 @@ export default function TranslateUI() {
     }
   }, []);
 
-  const handleChange = (lang, key, value) => {
+  const handleChange = (lang: Locale, key: string, value: string) => {
     setData((prev) => {
       const updated = {
         ...prev,
@@ -42,7 +42,7 @@ export default function TranslateUI() {
     });
   };
 
-  const handleNovaTranslate = async (key, lang) => {
+  const handleNovaTranslate = async (key: string, lang: Locale) => {
     const prompt = data.en[key];
     const res = await fetch('/api/nova-translate', {
       method: 'POST',
@@ -58,7 +58,7 @@ export default function TranslateUI() {
     handleChange(lang, key, cleaned);
   };
 
-  const allKeys = Object.keys(data.en);
+  const allKeys: string[] = Object.keys(data.en);
 
   const handleSaveToFile = () => {
     const fileContent = `export default ${JSON.stringify(data, null, 2)};`;
@@ -109,8 +109,8 @@ export default function TranslateUI() {
                 <td key={lang} className="p-2">
                   <input
                     className="w-full bg-white border border-gray-200 px-2 py-1 rounded text-xs"
-                    value={data[lang]?.[key] || ''}
-                    onChange={(e) => handleChange(lang, key, e.target.value)}
+                    value={data[lang as Locale]?.[key] || ''}
+                    onChange={(e) => handleChange(lang as Locale, key, e.target.value)}
                   />
                 </td>
               ))}
@@ -118,7 +118,7 @@ export default function TranslateUI() {
                 {LANGS.filter((l) => l !== 'en').map((lang) => (
                   <button
                     key={lang}
-                    onClick={() => handleNovaTranslate(key, lang)}
+                    onClick={() => handleNovaTranslate(key, lang as Locale)}
                     className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                   >
                     🪄 {lang.toUpperCase()}

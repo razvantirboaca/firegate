@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
+import type { JSX } from 'react';
 
 const Orb: FC = () => (
   <motion.div
@@ -12,7 +13,6 @@ const Orb: FC = () => (
 );
 
 export default function Home(): JSX.Element {
-
   const sparkle: string = `
     radial-gradient(circle at 30% 30%, oklch(0.9 0.15 75 / 0.1), transparent),
     radial-gradient(circle at 70% 70%, oklch(0.7 0.2 200 / 0.05), transparent)
