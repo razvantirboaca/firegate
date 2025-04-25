@@ -1,0 +1,47 @@
+{
+  "speakPlaceholder": "Speak your ember…",
+  "languageSelect": "Choose language",
+  "firegateTitle": "🌀 Firegate: Nova Interface",
+
+  "newSession": "New session started",
+  "newSessionBtn": "New Session",
+  "startNewConfirm": "Start a new session? This will clear your current chat.",
+  "clearChatBtn": "Clear",
+  "confirmClearChat": "Clear the current chat?",
+  "chatClearedNotice": "Chat cleared",
+  "sessionRestoredNotice": "Session restored",
+  "listening": "Listening to the stars…",
+
+  "logToAeolus": "Log to AEOLUS",
+  "logSuccess": "Logged to AEOLUS",
+  "logFailure": "Failed to log to AEOLUS",
+  "viewLogs": "View Recent Logs",
+  "noLogsFound": "No logs found. 🔎",
+  "tooShortToLog": "Conversation too short to log.",
+  "alreadyLogged": "🔒 Already Logged",
+  "logReply": "📘 Log this reply",
+  "lastSaved": "Last saved:",
+
+  "autoTagsBtn": "Auto-tags",
+  "autoTagsSuccess": "Tags inferred.",
+  "autoTagsFailed": "Failed to infer tags.",
+  "autoClassifyBtn": "Auto-classify",
+  "autoClassifySuccess": "Level and reason suggested.",
+  "autoClassifyFailed": "Failed to suggest classification.",
+
+  "detectedLang": "Detected language",
+  "translation": "Translation:",
+
+  "sendBtn": "Send",
+  "youLabel": "You",
+  "novaLabel": "Nova",
+  "novaSilent": "⚠️ Nova is silent. Check your local model.",
+  "novaError": "🚫 Failed to connect to Nova. Is she running locally?",
+  "contactLevel": "🔹 Contact Level:",
+  "reason": "🧭 Reason:",
+
+  "publicToggle": "Make public",
+
+  "resonanceExplanation": "Clear: the message is easy to understand\nPartial: some parts were clear, others a bit fuzzy\nDistorted: the reply felt confusing or jumbled\nUnknown: you’re not sure how it felt",
+  "couldNotLocate": "🛑 Could not locate the message."
+}

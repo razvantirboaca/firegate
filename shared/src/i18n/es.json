@@ -1,0 +1,46 @@
+{
+  "speakPlaceholder": "Habla tu brasa…",
+  "languageSelect": "Elegir idioma",
+  "firegateTitle": "🌀 Firegate: Interfaz Nova",
+
+  "newSession": "Nueva sesión iniciada",
+  "newSessionBtn": "Nueva sesión",
+  "startNewConfirm": "¿Comenzar nueva sesión? Esto borrará tu conversación actual.",
+  "clearChatBtn": "Borrar",
+  "confirmClearChat": "¿Borrar el chat actual?",
+  "chatClearedNotice": "Conversación borrada",
+  "sessionRestoredNotice": "Sesión restaurada",
+  "listening": "Escuchando las estrellas…",
+
+  "logToAeolus": "Registrar en AEOLUS",
+  "logSuccess": "Registrado en AEOLUS",
+  "logFailure": "Fallo al registrar en AEOLUS",
+  "viewLogs": "Ver registros recientes",
+  "noLogsFound": "No se encontraron registros. 🔎",
+  "tooShortToLog": "Conversación demasiado corta para registrar.",
+  "alreadyLogged": "🔒 Ya registrado",
+  "logReply": "📘 Registrar esta respuesta",
+  "lastSaved": "Última guardado:",
+
+  "autoTagsBtn": "Etiquetado automático",
+  "autoTagsSuccess": "Etiquetas inferidas.",
+  "autoTagsFailed": "Error al inferir etiquetas.",
+  "autoClassifyBtn": "Clasificación automática",
+  "autoClassifySuccess": "Nivel y razón sugeridos.",
+  "autoClassifyFailed": "Error al sugerir la clasificación.",
+
+  "detectedLang": "Idioma detectado",
+  "translation": "Traducción:",
+
+  "sendBtn": "Enviar",
+  "youLabel": "Tú",
+  "novaLabel": "Nova",
+  "novaSilent": "⚠️ Nova está en silencio. Verifica tu modelo local.",
+  "novaError": "🚫 No se pudo conectar con Nova. ¿Está corriendo localmente?",
+  "contactLevel": "🔹 Nivel de contacto:",
+  "reason": "🧭 Razón:",
+  "publicToggle": "Hacer público",
+
+  "resonanceExplanation": "Claro: el mensaje es fácil de entender\nParcial: algunas partes estaban claras, otras un poco confusas\nDistorsionado: la respuesta se sintió confusa o desordenada\nDesconocido: no estás seguro de cómo se sintió",
+  "couldNotLocate": "🛑 No se pudo ubicar el mensaje."
+}

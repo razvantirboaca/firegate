@@ -1,0 +1,18 @@
+{
+  "extends": "./config/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["shared/src/*"],
+      "@features/*": ["packages/ui/src/features/*"],
+      "@/*": ["packages/ui/src/*"]
+    }
+  },
+  "include": ["packages/**/*", "shared/**/*"],
+  "exclude": ["node_modules", "**/*.test.*", "dist"]
+}
