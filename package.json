@@ -13,6 +13,7 @@
     "dev:server": "yarn workspace @firegate/server start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "test": "vitest",
     "prepare": "husky install"
   },
   "lint-staged": {
