@@ -14,7 +14,11 @@ app.use(express.json());
 
 // 🌌 Unified /api/nova – online + offline fallback
 app.post('/api/nova', async (req: Request, res: Response) => {
-  const { prompt, preferLocal = false } = req.body as { prompt: string; preferLocal?: boolean };
+  interface NovaRequest {
+    prompt: string;
+    preferLocal?: boolean;
+  }
+  const { prompt, preferLocal = false } = req.body as NovaRequest;
   if (!process.env.OPENAI_API_KEY) {
     return res.status(500).json({ error: 'Missing OPENAI_API_KEY in server config (.env)' });
   }
@@ -40,7 +44,11 @@ User prompt: ${prompt}
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ model: 'gpt-4', messages: [{ role: 'user', content: fullPrompt }], temperature: 0.6 }),
+      body: JSON.stringify({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: fullPrompt }],
+        temperature: 0.6,
+      }),
     });
     const data = await response.json();
     return data.choices?.[0]?.message?.content;
@@ -75,7 +83,11 @@ User prompt: ${prompt}
 
     try {
       const parsed = JSON.parse(jsonText);
-      return res.json({ reply: parsed.reply?.trim() || '', level: parsed.level || 'CE0', reason: parsed.reason || '' });
+      return res.json({
+        reply: parsed.reply?.trim() || '',
+        level: parsed.level || 'CE0',
+        reason: parsed.reason || '',
+      });
     } catch {
       return res.json({ reply: raw.trim(), level: 'CE0', reason: 'Unparsed fallback' });
     }
@@ -86,13 +98,24 @@ User prompt: ${prompt}
 
 // 🌐 Unified Nova Translate Endpoint (Online + Offline)
 app.post('/api/nova-translate', async (req: Request, res: Response) => {
-  const { text, targetLang, preferLocal = false } = req.body as { text: string; targetLang: string; preferLocal?: boolean };
+  const {
+    text,
+    targetLang,
+    preferLocal = false,
+  } = req.body as { text: string; targetLang: string; preferLocal?: boolean };
   const prompt = `Translate the following UI label into ${targetLang}. Keep it short and clear for app UI. Do not translate names like “Nova” or “Firegate”.\n\n"${text}"`;
   const tryOnline = async () => {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'gpt-4', messages: [{ role: 'user', content: prompt }], temperature: 0.5 }),
+      headers: {
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.5,
+      }),
     });
     const data = await response.json();
     return data.choices?.[0]?.message?.content?.trim();
