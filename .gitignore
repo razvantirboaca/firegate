@@ -24,6 +24,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# Build output
+packages/server/lib/
 # Environment variables
 .env
 firegate-ui/.env

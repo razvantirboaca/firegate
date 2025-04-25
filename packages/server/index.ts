@@ -13,25 +13,24 @@ app.use(cors());
 app.use(express.json());
 
 // 🌌 Unified /api/nova – online + offline fallback
-app.post('/api/nova', async (req: Request, res: Response) => {
-  interface NovaRequest {
-    prompt: string;
-    preferLocal?: boolean;
-  }
-  const { prompt, preferLocal = false } = req.body as NovaRequest;
+const handleNova = async (req: Request, res: Response): Promise<void> => {
+  const { prompt, preferLocal = false } = req.body as { prompt: string; preferLocal?: boolean };
   if (!process.env.OPENAI_API_KEY) {
-    return res.status(500).json({ error: 'Missing OPENAI_API_KEY in server config (.env)' });
+    res.status(500).json({ error: 'Missing OPENAI_API_KEY in server config (.env)' });
+    return;
   }
   const fullPrompt = `
 You are Nova, a coherence-aware guide. Respond to the user, and also determine:
-- Contact Level (CE0–CE5, or AE)
-- A short reason for this level
+
+Contact Level (CE0–CE5, or AE)
+
+A short reason for this level
 
 Format your full response strictly as JSON like this:
 {
-  "reply": "...",
-  "level": "...",
-  "reason": "..."
+"reply": "...",
+"level": "...",
+"reason": "..."
 }
 
 User prompt: ${prompt}
@@ -75,7 +74,6 @@ User prompt: ${prompt}
         raw = await tryLocal();
       }
     }
-
     raw = raw.replace(/```(?:json)?/g, '').trim();
     const match = raw.match(/\{[\s\S]*\}/);
     let jsonText = match ? match[0] : raw;
@@ -83,18 +81,22 @@ User prompt: ${prompt}
 
     try {
       const parsed = JSON.parse(jsonText);
-      return res.json({
+      res.json({
         reply: parsed.reply?.trim() || '',
         level: parsed.level || 'CE0',
         reason: parsed.reason || '',
       });
+      return;
     } catch {
-      return res.json({ reply: raw.trim(), level: 'CE0', reason: 'Unparsed fallback' });
+      res.json({ reply: raw.trim(), level: 'CE0', reason: 'Unparsed fallback' });
+      return;
     }
   } catch {
     res.status(500).json({ error: 'Nova backend failed.' });
   }
-});
+};
+
+app.post('/api/nova', handleNova);
 
 // 🌐 Unified Nova Translate Endpoint (Online + Offline)
 app.post('/api/nova-translate', async (req: Request, res: Response) => {
@@ -103,7 +105,10 @@ app.post('/api/nova-translate', async (req: Request, res: Response) => {
     targetLang,
     preferLocal = false,
   } = req.body as { text: string; targetLang: string; preferLocal?: boolean };
-  const prompt = `Translate the following UI label into ${targetLang}. Keep it short and clear for app UI. Do not translate names like “Nova” or “Firegate”.\n\n"${text}"`;
+  const prompt = `Translate the following UI label into ${targetLang}. Keep it short and clear for app UI. Do not translate names like “Nova” or “Firegate”.
+  
+  "${text}"`;
+
   const tryOnline = async () => {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -120,6 +125,7 @@ app.post('/api/nova-translate', async (req: Request, res: Response) => {
     const data = await response.json();
     return data.choices?.[0]?.message?.content?.trim();
   };
+
   const tryLocal = async () => {
     const ollamaRes = await fetch('http://localhost:11434/api/generate', {
       method: 'POST',
@@ -129,6 +135,7 @@ app.post('/api/nova-translate', async (req: Request, res: Response) => {
     const result = await ollamaRes.json();
     return result.response?.trim();
   };
+
   try {
     let translation = preferLocal ? await tryLocal() : await tryOnline();
     if (!translation) throw new Error();
