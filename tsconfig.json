@@ -1,28 +1,18 @@
 {
   "extends": "./config/tsconfig.base.json",
   "compilerOptions": {
-    "declaration": true,
-    "emitDeclarationOnly": true,
     "noEmit": true,
-    "noImplicitAny": true,
     "strict": true,
     "allowJs": true,
     "checkJs": false,
     "jsx": "react-jsx",
-    "outDir": "dist",
-    "rootDir": ".",
+    "baseUrl": ".",
     "paths": {
       "@shared/*": ["shared/src/*"],
       "@features/*": ["packages/ui/src/features/*"],
       "@/*": ["packages/ui/src/*"]
     }
   },
-  "files": [],
-  "references": [
-    { "path": "./packages/ui" },
-    { "path": "./packages/server" },
-    { "path": "./shared" }
-  ],
-  "include": ["packages", "shared", "scripts", "*.ts", "*.js"],
-  "exclude": ["node_modules"]
+  "include": ["packages/**/*.{ts,tsx}", "shared/**/*.{ts,tsx}"],
+  "exclude": ["node_modules", "**/*.test.*", "**/*.js", "**/*.jsx", "dist"]
 }
