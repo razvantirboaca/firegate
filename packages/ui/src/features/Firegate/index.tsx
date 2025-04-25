@@ -43,7 +43,7 @@ interface ChatMessage {
   content: string;
   tags?: string[];
   lang?: string;
-  contactLevel?: string;
+  contactLevel?: 'CE0' | 'CE1' | 'CE2' | 'CE3' | 'CE4' | 'CE5' | 'AE';
   translated?: string | null;
   reason?: string;
   logged?: boolean;
@@ -51,7 +51,7 @@ interface ChatMessage {
 
 interface NovaResponse {
   reply: string;
-  level: string;
+  level: 'CE0' | 'CE1' | 'CE2' | 'CE3' | 'CE4' | 'CE5' | 'AE';
   reason: string;
 }
 
@@ -78,7 +78,7 @@ const Firegate: FC = () => {
   const isInitialMount = useRef<boolean>(true);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const { uiLang } = useLang();
-  const novaTranslate = useNovaTranslate();
+  const { translate: novaTranslate } = useNovaTranslate();
 
   const cleanQuotes = (str: string): string => str?.replace(/^"+|"+$/g, '').trim();
 
@@ -86,16 +86,17 @@ const Firegate: FC = () => {
     get(target: Record<string, string>, key: string | symbol) {
       const strKey = key.toString();
       if (target[strKey]) return target[strKey];
-
-      novaTranslate(strKey, uiLang).then((result) => {
-        const cleaned = cleanQuotes(result);
-        const beautified = cleaned
-          .replace(/([a-z])([A-Z])/g, '$1 $2')
-          .replace(/_/g, ' ')
-          .replace(/^./, (s) => s.toUpperCase())
-          .trim();
-        target[strKey] = beautified || humanize(strKey);
-      });
+      if (typeof novaTranslate === 'function') {
+        (novaTranslate as (key: string) => Promise<string>)(strKey).then((result: string) => {
+          const cleaned = cleanQuotes(result);
+          const beautified = cleaned
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
+            .replace(/_/g, ' ')
+            .replace(/^./, (s) => s.toUpperCase())
+            .trim();
+          target[strKey] = beautified || humanize(strKey);
+        });
+      }
 
       return `[🌀 ${strKey}]`;
     },
@@ -161,7 +162,7 @@ const Firegate: FC = () => {
     content: string,
     tags?: string[],
     lang?: string,
-    contactLevel?: string,
+    contactLevel?: 'CE0' | 'CE1' | 'CE2' | 'CE3' | 'CE4' | 'CE5' | 'AE',
     translated?: string | null,
     reason?: string
   ): void => {
@@ -199,7 +200,7 @@ const Firegate: FC = () => {
     } catch (err) {
       console.error('Nova error:', err);
       const errorMsg = labels.novaError;
-      appendNovaMessage(errorMsg, [], '', '', null);
+      appendNovaMessage(errorMsg, [], '', 'CE0', null);
       speak(errorMsg);
     } finally {
       setIsLoading(false);
@@ -299,7 +300,7 @@ const Firegate: FC = () => {
       q,
       (snapshot) => {
         const logs = snapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .map((doc) => ({ id: doc.id, ...doc.data() }) as RecentLog)
           .filter((log) => log.createdAt);
         setRecentLogs(logs);
       },
@@ -382,9 +383,9 @@ const Firegate: FC = () => {
                   {msg.role === 'user' ? labels.youLabel : labels.novaLabel}
                 </div>
 
-                {msg.role === 'nova' && msg.tags?.length > 0 && (
+                {msg.role === 'nova' && msg.tags && msg.tags.length > 0 && (
                   <div className="mb-2 text-xs text-amber-200 flex flex-wrap gap-1">
-                    {msg.tags.map((tag, idx) => (
+                    {(msg.tags || []).map((tag, idx) => (
                       <span
                         aria-label={`Tag ${tag}`}
                         key={idx}
@@ -402,7 +403,7 @@ const Firegate: FC = () => {
                       {labels.contactLevel} <strong>{msg.contactLevel}</strong>
                     </div>
                     {!msg.logged ? (
-                      <Button variant="link" size="xs" onClick={() => handleLogToAeolus(msg)}>
+                      <Button variant="link" size="sm" onClick={() => handleLogToAeolus(msg)}>
                         {labels.logReply}
                       </Button>
                     ) : (
@@ -417,27 +418,7 @@ const Firegate: FC = () => {
                 )}
 
                 <div className="prose prose-sm max-w-none text-white">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeHighlight]}
-                    components={{
-                      code({ inline, children, ...props }) {
-                        return !inline ? (
-                          <pre className="bg-black/30 text-white p-3 rounded-md overflow-auto my-2">
-                            <code {...props}>{children}</code>
-                          </pre>
-                        ) : (
-                          <code className="bg-black/20 text-white px-1 rounded" {...props}>
-                            {children}
-                          </code>
-                        );
-                      },
-                      ul: ({ children }) => <ul className="list-disc pl-6 mt-2">{children}</ul>,
-                      ol: ({ children }) => <ol className="list-decimal pl-6 mt-2">{children}</ol>,
-                      li: ({ children }) => <li className="mb-1">{children}</li>,
-                      p: ({ children }) => <p className="mb-2">{children}</p>,
-                    }}
-                  >
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
                     {msg.content || '*[Unformatted reply.]*'}
                   </ReactMarkdown>
                 </div>
@@ -445,7 +426,7 @@ const Firegate: FC = () => {
                 <div className="text-xs text-right text-amber-500 italic mt-2">
                   {labels.lastSaved}{' '}
                   {new Date(
-                    parseInt(localStorage.getItem('firegateSavedAt') || 0)
+                    parseInt(localStorage.getItem('firegateSavedAt') || '0')
                   ).toLocaleTimeString()}
                 </div>
 
@@ -479,7 +460,7 @@ const Firegate: FC = () => {
 
             <div className="flex items-center justify-between">
               <Label className="flex items-center gap-x-2 text-sm">
-                <Checkbox checked={isPublic} onCheckedChange={(value) => setIsPublic(!!value)} />
+                <Checkbox onCheckedChange={(val) => setIsPublic(Boolean(val))} />
                 <span>{labels.publicToggle}</span>
               </Label>
 
@@ -501,7 +482,7 @@ const Firegate: FC = () => {
               {recentLogs.map((log) => (
                 <li key={log.id} className="border border-amber-200 p-3 rounded bg-white shadow-sm">
                   <div className="text-xs text-gray-500 mb-1">
-                    {new Date(log.createdAt?.toDate?.()).toLocaleString()}
+                    {log.createdAt ? log.createdAt.toDate().toLocaleString() : 'Unknown date'}
                   </div>
                   <div className="mt-1 text-sm font-semibold text-purple-800">{log.userPrompt}</div>
                   <div className="mt-1 prose prose-sm max-w-none text-gray-800">

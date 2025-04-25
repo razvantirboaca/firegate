@@ -1,17 +1,19 @@
 {
   "name": "@firegate/server",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "index.ts",
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "ts-node-esm index.ts || node index.js"
+    "start": "NODE_OPTIONS='--loader ts-node/esm' ts-node index.ts"
   },
   "dependencies": {
-    "express": "^4.18.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "node-fetch": "^2.6.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  }
 }

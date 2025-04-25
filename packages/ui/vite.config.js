@@ -25,7 +25,10 @@ export default defineConfig({
     host: true,
     fs: {
       // Allow serving files from shared package
-      allow: [path.resolve(__dirname, '../../shared/src')]
+      allow: [
+        path.resolve(__dirname, './src'),
+        path.resolve(__dirname, '../../shared/src')
+      ]
     },
     proxy: {
       '/api': {

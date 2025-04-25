@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react-jsx",
+    "types": ["react", "react-dom"],
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "Node",
@@ -21,6 +22,7 @@
       "@context/*": ["src/context/*"]
     }
   },
-  "include": ["src", "../../shared/src"],
+  "references": [{ "path": "../../shared" }],
+  "include": ["src", "vite-env.d.ts"],
   "exclude": ["node_modules"]
 }

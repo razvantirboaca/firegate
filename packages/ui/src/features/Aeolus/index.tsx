@@ -88,7 +88,11 @@ export default function Aeolus() {
     return langInfo?.name || 'unknown';
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | { target: { name: string; value: string } }
+  ) => {
     const { name, value } = e.target;
     const updated = { ...log, [name]: value };
     setLog(updated);
@@ -113,7 +117,9 @@ export default function Aeolus() {
     setAutoClassifying(true);
     try {
       const { level, reason } = await suggestClassification(log.prompt);
-      setLog((prev) => ({ ...prev, level, reason }));
+      if (['CE0', 'CE1', 'CE2', 'CE3', 'CE4', 'CE5', 'AE'].includes(level)) {
+        setLog((prev) => ({ ...prev, level: level as AeolusLog['level'], reason }));
+      }
       toast.success(labels.autoClassifySuccess);
     } catch (err) {
       console.error('[AutoClassify error]', err);
@@ -403,7 +409,9 @@ export default function Aeolus() {
           <Checkbox
             name="isPublic"
             checked={log.isPublic}
-            onCheckedChange={(checked) => setLog({ ...log, isPublic: checked })}
+            onCheckedChange={(checked) =>
+              setLog({ ...log, isPublic: typeof checked === 'boolean' ? checked : false })
+            }
           />
           <span>Make this log public</span>
         </Label>
@@ -415,7 +423,11 @@ export default function Aeolus() {
         {status && <p className="text-center text-green-700 mt-3">{status}</p>}
       </div>
       <div className="flex items-center mt-10 gap-2">
-        <Checkbox id="showLogs" checked={showLogs} onCheckedChange={(val) => setShowLogs(val)} />
+        <Checkbox
+          id="showLogs"
+          checked={showLogs}
+          onCheckedChange={(val) => setShowLogs(val === true)}
+        />
         <Label htmlFor="showLogs">Show Public Logs</Label>
       </div>
 
@@ -446,7 +458,7 @@ export default function Aeolus() {
               <p className="text-sm mt-1 text-amber-900 whitespace-pre-wrap">
                 🔮 Reply: {entry.translatedReply || entry.novaReply}
               </p>
-              {entry.metadata?.tags?.length > 0 && (
+              {entry.metadata?.tags && entry.metadata?.tags?.length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-2">
                   {entry.metadata.tags.map((tag, idx) => (
                     <span
