@@ -14,7 +14,7 @@ app.use(express.json());
 
 // 🌌 Unified /api/nova – online + offline fallback
 const handleNova = async (req: Request, res: Response): Promise<void> => {
-  const { prompt, preferLocal = false } = req.body as { prompt: string; preferLocal?: boolean };
+  const { prompt, preferLocal = true } = req.body as { prompt: string; preferLocal?: boolean };
   if (!process.env.OPENAI_API_KEY) {
     res.status(500).json({ error: 'Missing OPENAI_API_KEY in server config (.env)' });
     return;
@@ -103,7 +103,7 @@ app.post('/api/nova-translate', async (req: Request, res: Response) => {
   const {
     text,
     targetLang,
-    preferLocal = false,
+    preferLocal = true,
   } = req.body as { text: string; targetLang: string; preferLocal?: boolean };
   const prompt = `Translate the following UI label into ${targetLang}. Keep it short and clear for app UI. Do not translate names like “Nova” or “Firegate”.
   
