@@ -14,6 +14,10 @@ const tsGlobals = {
   JSX: true,
   process: true,
   __dirname: true,
+  setTimeout: true,
+  clearTimeout: true,
+  setInterval: true,
+  clearInterval: true,
 }
 
 const tsRules = {

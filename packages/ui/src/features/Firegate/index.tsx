@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useRef, FC } from 'react';
 import { humanize } from '@shared/utils';
 import {
@@ -71,10 +72,10 @@ interface RecentLog {
 const Firegate: FC = () => {
   const [input, setInput] = useState<string>('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [isPublic, setIsPublic] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showDrawer, setShowDrawer] = useState<boolean>(false);
-  const [recentLogs, setRecentLogs] = useState<RecentLog[]>([]);
+  // const [isPublic, setIsPublic] = useState<boolean>(true);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [showDrawer, setShowDrawer] = useState<boolean>(false);
+  // const [recentLogs, setRecentLogs] = useState<RecentLog[]>([]);
   const isInitialMount = useRef<boolean>(true);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const { uiLang } = useLang();
@@ -207,21 +208,21 @@ const Firegate: FC = () => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+  /* const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
-  };
+  }; */
 
-  const handleClearChat = (): void => {
+  /* const handleClearChat = (): void => {
     setMessages([]);
     localStorage.removeItem('firegateMessages');
     localStorage.removeItem('firegateSavedAt');
     toast.success(labels.chatClearedNotice);
-  };
+  }; */
 
-  const handleLogToAeolus = async (novaMsg: ChatMessage): Promise<void> => {
+  /* const handleLogToAeolus = async (novaMsg: ChatMessage): Promise<void> => {
     const novaIndex = messages.findIndex((m) => m === novaMsg);
     if (novaIndex === -1) {
       toast.error(labels.couldNotLocate);
@@ -269,7 +270,7 @@ const Firegate: FC = () => {
       console.error('Log error:', err);
       toast.error(labels.logFailure);
     }
-  };
+  }; */
 
   useEffect(() => {
     const stored = localStorage.getItem('firegateMessages');

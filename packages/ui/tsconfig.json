@@ -20,7 +20,8 @@
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@context/*": ["src/context/*"]
-    }
+    },
+    "lib": ["dom", "dom.iterable", "esnext"]
   },
   "references": [{ "path": "../../shared" }],
   "include": ["src", "vite-env.d.ts"],
