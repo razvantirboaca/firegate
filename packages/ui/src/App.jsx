@@ -11,13 +11,14 @@ import Codex from '@features/Codex';
 import { Toaster } from 'sonner';
 import { Analytics } from '@vercel/analytics/react';
 import { OnlineStatusProvider } from './context/OnlineStatusContext';
+import CaminoViewer from '@/features/Camino';
 
 // Layout for pages with header and main spacing
 function Layout() {
   return (
     <>
       <Header />
-      <main className="flex-1 pt-16">
+      <main className="flex-1">
         <Outlet />
       </main>
     </>
@@ -29,10 +30,10 @@ function App() {
     <OnlineStatusProvider>
       <LangProvider>
         <div className="flex flex-col h-screen relative">
-          <div className="bg-gradient-to-b from-amber-100 via-orange-50 to-white absolute inset-0 -z-10" />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="manifesto" element={<Manifesto />} />
+            <Route path="/camino" element={<CaminoViewer />} />
             <Route element={<Layout />}>
               <Route path="/firegate" element={<Firegate />} />
               <Route path="/aeolus" element={<Aeolus />} />

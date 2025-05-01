@@ -1,6 +1,9 @@
 {
   "name": "firegate-monorepo",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "type": "module",
   "workspaces": [
     "packages/*",
@@ -16,20 +19,22 @@
     "test": "vitest",
     "prepare": "husky install"
   },
+  "preinstall": "node -e \"const [major]=process.versions.node.split('.'); if(major !== '20'){ console.error('❌ Node 20.x required. You are on', process.versions.node); process.exit(1); }\"",
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": "eslint --fix"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.1",
+    "@tailwindcss/vite": "^4.1.5",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/langs": "^2.0.5",
-    "@types/node": "^22.14.1",
+    "@types/node": "^22.15.3",
     "@types/node-fetch": "^2.6.12",
-    "@typescript-eslint/eslint-plugin": "^8.31.0",
-    "@typescript-eslint/parser": "^8.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
     "concurrently": "^9.1.2",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
@@ -38,7 +43,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
     "prettier": "^3.5.3",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^4.1.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "vitest": "^3.1.2"

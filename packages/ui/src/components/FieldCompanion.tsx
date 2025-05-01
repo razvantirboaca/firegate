@@ -62,7 +62,7 @@ export const FieldCompanion = () => {
   }, [isIdle]);
 
   return (
-    <div className="field-companion">
+    <div className="field-companion text-white/70 bg-white/10">
       <p>{currentWhisper}</p>
     </div>
   );
