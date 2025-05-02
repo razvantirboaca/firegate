@@ -92,7 +92,7 @@ export const SeedPortal = ({ input, setInput, sendMessage }: SeedPortalProps) =>
         ref={textareaRef}
         placeholder={placeholder}
         value={input}
-        maxLength={500}
+        maxLength={1500}
         onChange={(e) => {
           setInput(e.target.value);
           if (activeSuggestion && e.target.value.trim()) {
