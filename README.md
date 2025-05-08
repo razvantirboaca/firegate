@@ -73,8 +73,12 @@ yarn dev
 
 2. To use Nova offline:
 
-- Make sure Ollama is installed
-- Run the Mistral model locally: ollama run mistral
+- Install Ollama: https://ollama.com/docs/installation
+- Create the custom Nova model: `ollama create nova-egg --file ollama/Modelfile`
+  (Or, cd into the ollama folder and run: `ollama create nova-egg`)
+- Start Ollama’s HTTP server: `ollama serve`
+- (Optional) Chat directly via Ollama CLI: `ollama run nova-egg`
+- (Optional) Use our filtered REPL: `node scripts/cli-interface.js`
 
 ## 🔮 Live Features
 
