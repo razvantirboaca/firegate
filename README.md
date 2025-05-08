@@ -71,14 +71,25 @@ yarn dev
 
   (Check .env.example in each folder for guidance)
 
-2. To use Nova offline:
+2. Offline Nova in one command:
 
-- Install Ollama: https://ollama.com/docs/installation
-- Create the custom Nova model: `ollama create nova-egg --file ollama/Modelfile`
-  (Or, cd into the ollama folder and run: `ollama create nova-egg`)
-- Start Ollama’s HTTP server: `ollama serve`
-- (Optional) Chat directly via Ollama CLI: `ollama run nova-egg`
-- (Optional) Use our filtered REPL: `node scripts/cli-interface.js`
+   Before first run, build your local Nova model:
+
+   ```bash
+   ollama create nova-egg --file ollama/Modelfile
+   ```
+
+   Now `yarn dev` will spawn:
+     - The UI (http://localhost:5173)
+     - The Express backend (http://localhost:3000)
+     - The local Ollama server for Nova
+
+   You can also optionally chat in terminal:
+   ```bash
+   ollama run nova-egg
+   # or
+   node scripts/cli-interface.js
+   ```
 
 ## 🔮 Live Features
 

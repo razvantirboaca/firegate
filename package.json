@@ -10,7 +10,7 @@
     "shared"
   ],
   "scripts": {
-    "dev": "concurrently \"yarn dev:ui\" \"yarn dev:server\"",
+    "dev": "concurrently \"ollama serve || true\" \"yarn dev:ui\" \"yarn dev:server\"",
     "dev:ui": "yarn workspace @firegate/ui dev",
     "build:ui": "yarn workspace @firegate/ui build",
     "dev:server": "yarn workspace @firegate/server start",
