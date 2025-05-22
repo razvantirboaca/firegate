@@ -19,35 +19,57 @@
 | Ambient Transitions Hook   | useAmbientTransition.ts | 🕐 pending | React hook to trigger fade, pulse, ripple animations when zones or states change.                                                  |
 | Soul Layer Context         | SoulLayerContext.tsx    | 🕐 pending | React context managing the current soul layer, ambient state, and navigation flow across rooms.                                    |
 | Memory Engine Service      | MemoryEngine.ts         | 🕐 pending | Service handling backend sync, Nova responses, Camino markdown updates, and log storage.                                           |
-| Nova Controller Module     | NovaController.ts       | 🕐 pending | Module managing multi-provider routing (OpenAI, Ollama, Groq, etc.) and Nova’s behavior integration.                               |
-| Self-Modification Layer    | NovaReviewLayer.tsx     | 🕐 pending | Review layer for Nova’s self-modifications and evolution checkpoints.                                                              |
 
 ---
 
 ## 📁 UI Folder Structure
 
-packages/ui/src/  
-├── components/ # Reusable UI components (buttons, modals, etc.)  
-├── features/  
-│ ├── firegate/  
-│ │ ├── components/ # Firegate-specific components  
-│ │ ├── pages/ # Firegate pages  
-│ │ └── index.tsx # Entry point for Firegate feature  
-│ ├── aeolus/  
-│ │ ├── components/ # Aeolus-specific components  
-│ │ ├── pages/ # Aeolus pages  
-│ │ └── index.tsx # Entry point for Aeolus feature  
-│ └── ... # Other features follow the same pattern  
-├── layouts/ # Layout components (e.g., main layout, auth layout)  
-├── routes/ # Route definitions and navigation logic  
-├── services/ # API calls and business logic  
-├── hooks/ # Custom React hooks  
-├── contexts/ # React context providers  
-├── utils/ # Utility functions  
-├── types/ # TypeScript type definitions  
-├── assets/ # Static assets (images, fonts, etc.)  
-├── styles/ # Global and theme styles  
+```
+packages/ui/src/
+├── components/ # Reusable UI components (buttons, modals, etc.)
+├── features/
+│ ├── firegate/
+│ │ ├── components/ # Firegate-specific components
+│ │ ├── pages/ # Firegate pages
+│ │ └── index.tsx # Entry point for Firegate feature
+│ ├── aeolus/
+│ │ ├── components/ # Aeolus-specific components
+│ │ ├── pages/ # Aeolus pages
+│ │ └── index.tsx # Entry point for Aeolus feature
+│ └── ... # Other features follow the same pattern
+├── layouts/ # Layout components (e.g., main layout, auth layout)
+├── routes/ # Route definitions and navigation logic
+├── services/ # API calls and business logic
+├── hooks/ # Custom React hooks
+├── contexts/ # React context providers
+├── utils/ # Utility functions
+├── types/ # TypeScript type definitions
+├── assets/ # Static assets (images, fonts, etc.)
+├── styles/ # Global and theme styles
 └── App.tsx # Root component
+```
+
+### features/firegate/
+
+```
+features/firegate/
+├── components/
+│ ├── Firegate.tsx
+│ ├── LeftSpiral.tsx
+│ ├── MemoryPool.tsx
+│ ├── FieldCompanion.tsx
+│ ├── FloatingHeader.tsx
+│ ├── AmbientFooter.tsx
+│ └── TempleNavigator.tsx
+├── hooks/
+│ └── useAmbientTransition.ts
+├── contexts/
+│ └── SoulLayerContext.tsx
+├── services/
+│ └── MemoryEngine.ts
+├── index.tsx
+├── types.ts
+```
 
 ---
 
@@ -57,9 +79,6 @@ packages/ui/src/
 - [x] Implement ambient control syncing Nova layer and background.
 - [x] Add shimmer effect during Nova thinking phase.
 - [x] Build Living Roadmap tracker and keep it synced.
-- [ ] Add multi-provider Codex config (Ollama, OpenAI, Groq, etc.).
-- [ ] Implement Nova Controller module for provider routing.
-- [ ] Add review layer for Nova’s self-modifications.
 - [ ] Generate `.tsx` skeleton components for new layout.
 - [ ] Refactor navigation + layout for modular scaling.
 - [ ] Review and align UI/feature directory structure.
